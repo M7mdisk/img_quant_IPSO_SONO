@@ -4,11 +4,18 @@ clc
 
 pkg load statistics
 
-ps = 10;
-nfe_max = 100;
 Xmin = 0;
 Xmax = 255;
-K = 12;
+
+% Population size
+ps = 10;
+
+% Max function evals
+nfe_max = 100;
+
+% Number of colors to be used
+K = 5;
+
 D = K * 3;
 fhd=@mymse;
 
