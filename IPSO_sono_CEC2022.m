@@ -65,7 +65,7 @@ function [gbestval,ccurve, dcurve,gbest] = IPSO_sono_CEC2022(ps, nfe_max, Xmin, 
 
         w = w_max - (w_max-w_min)*nfe/nfe_max;
         N0 = 0.9; Nf = 0.1;
-        ratio = N0*(Nf/N0)^(nfe/nfe_max);  % 4 wins agisnt 3 loss (compared to original eq.
+        ratio = N0*(Nf/N0)^(nfe/nfe_max);  % The ratio here is the ratio of worse-particle group. But since the particles are sorted from the worst to the best, this ratio reflects the one described in the Paper.
 
        % ratio = 0.1 + 0.8*log(nfe/nfe_max+1);
         [~,index]=sort(eval,'descend');
@@ -126,11 +126,13 @@ function [gbestval,ccurve, dcurve,gbest] = IPSO_sono_CEC2022(ps, nfe_max, Xmin, 
 
         ave=mean(pos);
 
-        if rand<0.5
-            competitor=nbest.*(cosd(90*(1-nfe/nfe_max)))+rand(1,D).*(nbest - ave);
-        else
-            competitor=nbest.*(sind(90*(1-nfe/nfe_max)))+rand(1,D).*(nbest - ave);
-        end
+        competitor = 2*ave - nbest;
+
+%         if rand<0.5
+%             competitor=nbest.*(cosd(90*(1-nfe/nfe_max)))+rand(1,D).*(nbest - ave);
+%         else
+%             competitor=nbest.*(sind(90*(1-nfe/nfe_max)))+rand(1,D).*(nbest - ave);
+%         end
 
         % Boundary check
 

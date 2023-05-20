@@ -2,18 +2,16 @@ function mses = mymse(colorPalettes, image)
     [palleteSize, numPalettes ]= size(colorPalettes);
     matrix = double(image);
 
-    if size(matrix, 3) == 4
-        matrix = matrix(:, :, 1:3);
-    end
+
 
     mat = reshape(matrix, [], 3);
 
     mses = zeros(numPalettes, 1);
+    paletteSize = size(colorPalettes,1)/3;
 
     % Calculate the MSE for each color palette
     for i = 1:numPalettes
 
-        paletteSize = size(colorPalettes,1)/3;
 
         palette = reshape(colorPalettes(:,i),3,paletteSize)';
 
